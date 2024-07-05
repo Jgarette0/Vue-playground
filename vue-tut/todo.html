@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="flex flex-col place-items-center w-screen p-20 justify-center">
+    <div id="app">
+      <div
+        class="flex flex-col place-items-center justify-center gap-8 p-8 rounded-lg border border-gray-800"
+      >
+        <div
+          class="border border-gray-800 rounded-lg px-12 py-4 flex flex-col place-items-start justify-center w-full"
+          v-show="taskTodo.length"
+        >
+          <h2 class="font-mono font-semibold text-3xl py-4">To be done:</h2>
+          <ul
+            class="highlight-none hover:bg-gray-100 w-full"
+            v-for="todo in taskTodo"
+            :key="todo.id"
+          >
+            <label class="flex flex-row justify-between">
+              <span class="text-lg"> {{todo.chore}} </span>
+
+              <input type="checkbox" v-model="todo.done" />
+            </label>
+          </ul>
+        </div>
+        <div
+          class="border border-gray-800 rounded-lg px-12 py-4 flex flex-col place-items-start justify-center w-full"
+          v-show="doneTodo.length"
+        >
+          <h2 class="font-mono font-semibold text-3xl py-4">doned:</h2>
+
+          <ul v-for="todo in doneTodo" :key="todo.id">
+            <label class="flex flex-row justify-between">
+              <span class="text-lg line-through"> {{todo.chore}} </span>
+
+              <input class="hidden" type="checkbox" v-model="todo.done" />
+            </label>
+          </ul>
+        </div>
+        <div
+          class="border border-gray-800 rounded-lg px-12 py-4 flex flex-col place-items-start justify-center"
+        >
+          <h2 class="font-mono font-semibold text-3xl py-4">Demo:</h2>
+          <pre>
+       {{todos}}
+      </pre
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      let app = {
+        data() {
+          return {
+            todos: [
+              { chore: "wash the dishes", done: false, id: 1 },
+              { chore: "buy grocery", done: false, id: 2 },
+              { chore: "clean the room", done: false, id: 3 },
+            ],
+          };
+        },
+
+        computed: {
+          doneTodo() {
+            return this.todos.filter((todo) => todo.done);
+          },
+          taskTodo() {
+            return this.todos.filter((todo) => !todo.done);
+          },
+        },
+      };
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
