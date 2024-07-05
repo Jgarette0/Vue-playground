@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcom to Vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="test">
+      <div>
+        <input type="text" v-model="hello" />
+      </div>
+      <div>{{hello}}({{hello.length}})</div>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            hello: "Hello",
+          };
+        },
+
+        mounted() {
+          setTimeout(() => {
+            this.hello = "Hello There!";
+          }, 3000);
+        },
+      }).mount("#test");
+    </script>
+  </body>
+</html>
